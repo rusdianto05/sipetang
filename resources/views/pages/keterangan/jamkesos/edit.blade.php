@@ -1,0 +1,54 @@
+@extends('layouts.app')
+@section('title', 'Keterangan Jamkesos')
+@section('content')
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Edit Surat Keterangan Jamkesos</h4>
+        <p class="card-description">
+          Edit form dibawah ini
+        </p>
+        <form class="forms-sample" method="POST" action="{{ url('/keterangan/jamkesos/'.$item->id) }}" enctype="multipart/form-data">
+          @csrf
+          @method('PUT')
+          <div class="form-group">
+            <label for="name">Name</label>
+            <select class="form-control" id="user_id" name="user_id">
+              <option>Silahkan Pilih Data</option>
+              @forelse ($user as $person)
+              <option value="{{ $person->id }}" {{$item->user_id == $person->id ? 'selected' : ''  }}>{{ $person->person_id . '-' . $person->name . '-' . $person->date_of_birth }}</option>
+              @empty
+                  
+              @endforelse
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="surat_id">Surat</label>
+            <select class="form-control" id="surat_id" name="surat_id">
+              <option value="1" {{$item->surat_id == 1 ? 'selected' : ''  }}>Keterangan</option>
+              <option value="2" {{$item->surat_id == 2 ? 'selected' : ''  }}>Permohonan</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="jamkesos_id">No Jamkesos</label>
+            <input type="text" class="form-control" id="jamkesos_id" name="jamkesos_id" value="{{ $item->jamkesos_id }}">
+          </div>
+          <div class="form-group">
+            <label for="keperluan">Keperluan</label>
+            <input type="text" class="form-control" id="keperluan" name="keperluan" value="{{ $item->keperluan }}" placeholder="Keperluan">
+          </div>
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select class="form-control" id="status" name="status">
+              <option value="pending" {{ $item->status == 'pending' ? 'selected' : '' }}>Pending</option>
+              <option value="approved" {{ $item->status == 'approved' ? 'selected' : '' }}>Diterima</option>
+              <option value="rejected" {{ $item->status == 'rejected' ? 'selected' : '' }}>Ditolak</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary me-2">Submit</button>
+          <button type="reset" class="btn btn-light">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+@endsection

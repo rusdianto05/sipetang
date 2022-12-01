@@ -57,4 +57,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function beda_nama()
+    {
+        return $this->hasMany(KeteranganBedaNama::class);
+    }
+    public function domisili_usaha_luar()
+    {
+        return $this->hasMany(KetDomisiliUsahaLuar::class);
+    }
+    public function ket_ktp()
+    {
+        return $this->hasMany(KetKtp::class);
+    }
 }
