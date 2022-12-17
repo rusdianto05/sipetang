@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('ket_domisili_usaha_luar', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
-            $table->bigInteger('office_id');
             $table->bigInteger('surat_id');
             $table->string('jenis_identitas');
             $table->string('no_identitas');

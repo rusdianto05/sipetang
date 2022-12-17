@@ -16,12 +16,19 @@ return new class extends Migration
         Schema::create('ket_nikah', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
+            $table->bigInteger('ayah_id');
+            $table->bigInteger('ibu_id');
 
             $table->bigInteger('surat_id');
-            $table->text('tujuan');
+            $table->bigInteger('pasangan_id');
+            $table->bigInteger('ayah_pasangan_id');
+            $table->bigInteger('ibu_pasangan_id');
+            $table->bigInteger('wali_id');
+            $table->bigInteger('pasangan_dulu_id')->nullable();
+            $table->string('place');
+            $table->text('mas_kawin')->nullable();
             $table->enum('status', ['pending', 'approved', 'rejected']);
-            $table->date('valid_from');
-            $table->date('valid_until');
+            $table->timestamp('time');
             $table->timestamps();
             $table->softDeletes();
         });

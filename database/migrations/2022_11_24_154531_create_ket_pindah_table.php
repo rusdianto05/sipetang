@@ -20,11 +20,9 @@ return new class extends Migration
             $table->bigInteger('surat_id');
             $table->enum('status', ['pending', 'approved', 'rejected']);
             $table->text('alamat_pindah');
-            $table->string('kodepos');
             $table->text('alasan_pindah');
+            $table->string('jumlah_pengikut');
             $table->date('tanggal_pindah');
-            $table->date('valid_from');
-            $table->date('valid_until');
 
             $table->timestamps();
             $table->softDeletes();

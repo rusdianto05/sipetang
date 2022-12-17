@@ -5,9 +5,12 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Data Surat Keterangan Domisili Usaha Lokal</h4>
+        @role('admin')
         <a href="{{ url('/keterangan/usaha-lokal/create') }}" class="card-description">
          Tambah Data
         </a>
+        @endrole
+        {{-- end check role --}}
         <div class="table-responsive pt-3">
           <table id="usahaLokal" class="table table-bordered table-hover">
             <thead>
@@ -51,7 +54,7 @@
         },
         columns: [
             { data: 'id', name: 'id', width: '5%'},
-            { data: 'nama', name: 'nama'},
+            { data: 'user.name', name: 'user.name'},
             { data: 'name', name: 'nama usaha'},
             { data: 'jenis', name: 'jenis usaha'},
             { data: 'alamat', name: 'alamat usaha'},

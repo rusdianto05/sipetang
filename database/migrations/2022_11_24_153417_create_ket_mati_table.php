@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('sebab')->nullable();
             $table->text('place')->nullable();
             $table->timestamp('waktu')->nullable();
+            $table->enum('status', ['pending', 'approved', 'rejected']);
 
             $table->timestamps();
             $table->softDeletes();

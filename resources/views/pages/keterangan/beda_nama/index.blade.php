@@ -5,9 +5,11 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Data Surat Keterangan Beda Nama</h4>
+        @role('admin')
         <a href="{{ url('keterangan/beda-nama/create') }}" class="card-description">
          Tambah Data
         </a>
+        @endrole
         <div class="table-responsive pt-3">
           <table id="crudTable" class="table table-bordered table-hover">
             <thead>
@@ -24,6 +26,7 @@
                 <th>
                   Perbedaan
                 </th>
+                <th>Status</th>
                 <th>
                   Aksi
                 </th>
@@ -45,9 +48,10 @@
         },
         columns: [
             { data: 'id', name: 'id', width: '5%'},
-            { data: 'nama', name: 'nama'},
+            { data: 'user.name', name: 'user.name'},
             { data: 'new_name', name: 'new_name'},
             { data: 'perbedaan', name: 'perbedaan'},
+            { data: 'status', name: 'status'},
             {
                 data: 'action',
                 name: 'action',

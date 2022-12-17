@@ -17,12 +17,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->bigInteger('surat_id');
-            $table->string('nama_anak');
-            $table->enum('gender', ['male', 'female', 'hidden']);
             $table->enum('kondisi', ['hidup', 'mati']);
             $table->text('lama_kandungan')->nullable();
-            $table->bigInteger('ayah_id')->nullable();
-            $table->bigInteger('ibu_id')->nullable();
             $table->bigInteger('pelapor_id')->nullable();
             $table->string('pelapor_hubungan')->nullable();
             $table->timestamp('tanggal_lahir');

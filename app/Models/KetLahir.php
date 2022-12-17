@@ -16,12 +16,8 @@ class KetLahir extends Model
         'id',
         'user_id',
         'surat_id',
-        'nama_anak',
-        'gender',
         'kondisi',
         'lama_kandungan',
-        'ayah_id',
-        'ibu_id',
         'pelapor_id',
         'pelapor_hubungan',
         'tanggal_lahir',
@@ -39,15 +35,6 @@ class KetLahir extends Model
         return $this->belongsTo(Surat::class);
     }
 
-    public function ayah()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function ibu()
-    {
-        return $this->belongsTo(User::class);
-    }
 
     public function pelapor()
     {

@@ -12,6 +12,7 @@ class KeteranganBedaNama extends Model
     protected $table = 'ket_beda_nama';
     protected $fillable = [
         'user_id',
+        'surat_id',
         'new_name',
         'perbedaan',
         'status',
@@ -21,5 +22,10 @@ class KeteranganBedaNama extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function surat()
+    {
+        return $this->belongsTo(Surat::class);
     }
 }

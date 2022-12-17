@@ -11,6 +11,15 @@
         <form class="forms-sample" method="POST" action="{{ url('/keterangan/usaha-luar/'.$item->id) }}" enctype="multipart/form-data">
           @csrf
           @method('PUT')
+          @if($errors->any())
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+          @endif
           <div class="form-group">
             <label for="name">Name</label>
             <select class="form-control" id="user_id" name="user_id">
@@ -65,6 +74,7 @@
             <label for="address">Alamat</label>
             <textarea class="form-control" id="address" name="address">{{ $item->address }}</textarea>
           </div>
+          @role('admin')
           <div class="form-group">
             <label for="Status">Status</label>
             <select class="form-control" id="status" name="status">
@@ -73,6 +83,7 @@
               <option value="rejected" {{$item->status == 'rejected' ? 'selected' : ''  }}>Ditolak</option>
             </select>
           </div>
+          @endrole
           <button type="submit" class="btn btn-primary me-2">Submit</button>
           <button type="reset" class="btn btn-light">Cancel</button>
         </form>

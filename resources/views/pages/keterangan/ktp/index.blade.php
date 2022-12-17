@@ -5,9 +5,12 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Data Surat Keterangan ktp</h4>
+        @role('admin')
         <a href="{{ url('keterangan/ktp/create') }}" class="card-description">
          Tambah Data
         </a>
+        @endrole
+        {{-- end check role --}}
         <div class="table-responsive pt-3">
           <table id="crudTable" class="table table-bordered table-hover">
             <thead>

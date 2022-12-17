@@ -52,18 +52,21 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone' => ['required', 'max:255'],
-            'religion' => ['required', 'string', 'max:255'],
-            'gender' => ['required', 'string', 'max:255'],
-            'citizenship' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string', 'max:255'],
-            'blood_group' => ['required', 'string', 'max:255'],
-            'married_status' => ['required', 'string', 'max:255'],
-            'job' => ['required', 'string', 'max:255'],
-            'last_education' => ['required', 'string', 'max:255'],
-            'place_of_birth' => ['required', 'string', 'max:255'],
-            'date_of_birth' => ['required', 'date', 'max:255'],
+            'password' => ['required', 'string', 'min:8'],
+            'phone' => ['required'],
+            'gender' => ['required'],
+            'person_id' => ['required'],
+            'family_id' => ['required'],
+            'address' => ['required'],
+            'citizenship' => ['required'],
+            'religion' => ['required'],
+            'blood_group' => ['required'],
+            'married_status' => ['required'],
+            'job' => ['required'],
+            'last_education' => ['required'],
+            'place_of_birth' => ['required'],
+            'date_of_birth' => ['required'],
+
         ]);
     }
 
@@ -75,15 +78,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
+        $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone' => $data['phone'],
+            'address' => $data['address'],
+            'person_id' => $data['person_id'],
+            'family_id' => $data['family_id'],
             'religion' => $data['religion'],
             'gender' => $data['gender'],
             'citizenship' => $data['citizenship'],
-            'address' => $data['address'],
             'blood_group' => $data['blood_group'],
             'married_status' => $data['married_status'],
             'job' => $data['job'],
@@ -91,9 +96,8 @@ class RegisterController extends Controller
             'place_of_birth' => $data['place_of_birth'],
             'date_of_birth' => $data['date_of_birth'],
         ]);
-
+        // assign role to user
         $user->assignRole('user');
-
         return $user;
     }
 }

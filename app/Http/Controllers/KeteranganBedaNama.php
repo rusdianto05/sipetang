@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\KeteranganBedaNama as KeteranganBedaNamaModel;
+use App\Models\Office;
+use Illuminate\Support\Facades\Auth;
 
 class KeteranganBedaNama extends Controller
 {
@@ -16,14 +18,10 @@ class KeteranganBedaNama extends Controller
      */
     public function index(Request $request)
     {
-
         if (request()->ajax()) {
-            $query = KeteranganBedaNamaModel::query();
+            $query = KeteranganBedaNamaModel::query()->with(['user', 'surat']);
 
             return DataTables::of($query)
-                ->addColumn('nama', function ($data) {
-                    return $data->user->name;
-                })
                 ->addColumn('action', function ($item) {
                     return '
 
@@ -34,6 +32,8 @@ class KeteranganBedaNama extends Controller
                     <a href="/keterangan/beda-nama/delete/' . $item->id . '"  class="btn btn-danger mb-2">
                     Hapus
                     </a>
+                    &nbsp;
+                    <a href="/keterangan/beda-nama/cetak/' . $item->id . '" class="btn btn-otline-dark"><i class="icon-printer"></i> Print</a>
                     ';
                 })
                 ->rawColumns(['action'])
@@ -68,7 +68,7 @@ class KeteranganBedaNama extends Controller
         ]);
 
         KeteranganBedaNamaModel::create($request->all());
-        return redirect()->route('beda-nama.index')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect()->route('beda-nama.index')->with('message', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -77,9 +77,25 @@ class KeteranganBedaNama extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        if (request()->ajax()) {
+            $query = KeteranganBedaNamaModel::query()->with(['user', 'surat'])->where('user_id', auth()->user()->id);
+
+            return DataTables::of($query)
+                ->addColumn('action', function ($item) {
+                    return '
+                    <a href="/keterangan/beda-nama/' . $item->id . '/edit"  class="btn btn-primary mb-2">
+                        Edit
+                    </a>
+                    &nbsp;
+                    <a href="/keterangan/beda-nama/cetak/' . $item->id . '" class="btn btn-otline-dark"><i class="icon-printer"></i> Print</a>
+                    ';
+                })
+                ->rawColumns(['action'])
+                ->make();
+        }
+        return view('pages.keterangan.beda_nama.index');
     }
 
     /**
@@ -112,7 +128,10 @@ class KeteranganBedaNama extends Controller
 
         $bedanama = KeteranganBedaNamaModel::find($id);
         $bedanama->update($request->all());
-        return redirect()->route('beda-nama.index')->with('success', 'Data Berhasil Diedit');
+        if (Auth::user()->hasrole('admin'))
+            return redirect()->route('beda-nama.index')->with('message', 'Data Berhasil Diedit');
+        else
+            return redirect()->route('beda-nama.show')->with('message', 'Data Berhasil Diedit');
     }
 
     /**
@@ -125,6 +144,13 @@ class KeteranganBedaNama extends Controller
     {
         $bedanama = KeteranganBedaNamaModel::find($id);
         $bedanama->delete();
-        return redirect()->route('beda-nama.index')->with('success', 'Data Berhasil Dihapus');
+        return redirect()->route('beda-nama.index')->with('message', 'Data Berhasil Dihapus');
+    }
+
+    public function cetak($id)
+    {
+        $kantor = Office::first();
+        $bedanama = KeteranganBedaNamaModel::find($id);
+        return view('pages.keterangan.beda_nama.cetak', compact('bedanama', 'kantor'));
     }
 }

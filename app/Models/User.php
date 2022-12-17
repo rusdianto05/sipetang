@@ -36,7 +36,6 @@ class User extends Authenticatable
         'place_of_birth',
         'date_of_birth',
         'photo',
-        'expired_date',
     ];
 
     /**
@@ -69,5 +68,9 @@ class User extends Authenticatable
     public function ket_ktp()
     {
         return $this->hasMany(KetKtp::class);
+    }
+    public function mati()
+    {
+        return $this->hasMany(KetMati::class);
     }
 }

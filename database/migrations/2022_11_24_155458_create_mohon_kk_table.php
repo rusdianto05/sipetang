@@ -16,12 +16,9 @@ return new class extends Migration
         Schema::create('mohon_kk', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
-
             $table->bigInteger('surat_id');
-            $table->string('family_id');
-            $table->text('alasan');
+            $table->string('type');
             $table->enum('status', ['pending', 'approved', 'rejected']);
-
             $table->timestamps();
             $table->softDeletes();
         });

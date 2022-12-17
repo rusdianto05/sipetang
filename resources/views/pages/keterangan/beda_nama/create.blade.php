@@ -10,6 +10,15 @@
         </p>
         <form class="forms-sample" method="POST" action="{{ route('beda-nama.store') }}" enctype="multipart/form-data">
           @csrf
+          @if ($errors->any())
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+           @endif
           <div class="form-group">
             <label for="name">Name</label>
             <select class="form-control" id="user_id" name="user_id">
@@ -26,8 +35,15 @@
             <input type="text" class="form-control" id="new_name" name="new_name" placeholder="Nama Baru">
           </div>
           <div class="form-group">
-            <label for="perbedaan">Perbedaan</label>
-            <input type="text" class="form-control" id="perbedaan" name="perbedaan" placeholder="Perbedaan nama">
+            <label for="perbedaan">Keterangan</label>
+            <input type="text" class="form-control" id="perbedaan" name="perbedaan" placeholder="Keterangan">
+          </div>
+          <div class="form-group">
+            <label for="surat_id">Surat</label>
+            <select class="form-control" id="surat_id" name="surat_id">
+              <option value="1">Keterangan</option>
+              <option value="2">Permohonan</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="Status">Status</label>

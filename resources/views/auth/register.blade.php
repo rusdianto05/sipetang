@@ -1,273 +1,132 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-                        <div class="row mb-3">
-                            <label for="person_id" class="col-md-4 col-form-label text-md-end">{{ __('NIK') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="person_id" type="number" class="form-control @error('person_id') is-invalid @enderror" name="person_id" value="{{ old('person_id') }}" required autocomplete="person_id" autofocus>
-
-                                @error('person_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="family_id" class="col-md-4 col-form-label text-md-end">{{ __('NO KK') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="family_id" type="number" class="form-control @error('family_id') is-invalid @enderror" name="family_id" value="{{ old('family_id') }}" required autocomplete="family_id" autofocus>
-
-                                @error('family_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nama') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Anda') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Ulangi Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('No HP') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
-
-                                @error('phone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="religion" class="col-md-4 col-form-label text-md-end">{{ __('Agama') }}</label>
-
-                            <div class="col-md-6">
-                                <select class="form-select" id="religion" name="religion" >
-                                    <option selected>Silahkan Pilih Agama Anda</option>
-                                    <option value="Islam">Islam</option>
-                                    <option value="Kristen">Kristen</option>
-                                    <option value="Katolik">Katolik</option>
-                                    <option value="Hindu">Hindu</option>
-                                    <option value="Buddha">Buddha</option>
-                                    <option value="Konghucu">Konghucu</option>
-                                  </select>
-                                @error('religion')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="gender" class="col-md-4 col-form-label text-md-end">{{ __('Jenis Kelamin') }}</label>
-
-                            <div class="col-md-6">
-                                <select name="gender" id="gender" class="form-select" required>
-                                    <option selected>Silahkan Pilih Jenis Kelamin</option>
-                                    <option value="male">Laki - Laki</option>
-                                    <option value="female">Perempuan</option>
-                                  </select>
-                                @error('gender')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="citizenship" class="col-md-4 col-form-label text-md-end">{{ __('Kewarganegaraan') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="citizenship" type="text" class="form-control @error('citizenship') is-invalid @enderror" name="citizenship" value="{{ old('citizenship') }}" required autocomplete="citizenship" autofocus>
-
-                                @error('citizenship')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="address" class="col-md-4 col-form-label text-md-end">{{ __('Alamat') }}</label>
-
-                            <div class="col-md-6">
-                               <textarea id="address" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address"></textarea>
-
-                                @error('address')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="blood_group" class="col-md-4 col-form-label text-md-end">{{ __('Golongan Darah') }}</label>
-
-                            <div class="col-md-6">
-                                <select name="blood_group" id="blood_group" class="form-select" required>
-                                    <option value="-">Tidak Tahu</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="AB">AB</option>
-                                    <option value="O">O</option>
-                                  </select>
-
-                                @error('blood_group')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="married_status" class="col-md-4 col-form-label text-md-end">{{ __('Status Perkawinan') }}</label>
-                            <div class="col-md-6">
-                                <select name="married_status" id="married_status" class="form-select" required>
-                                    <option value="Belum Kawin">Belum Kawin</option>
-                                    <option value="Kawin">Kawin</option>
-                                    <option value="Cerai Hidup">Cerai Hidup</option>
-                                    <option value="Cerai Mati">Cerai Mati</option>
-                                  </select>
-
-                                @error('married_status')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="job" class="col-md-4 col-form-label text-md-end">{{ __('Pekerjaan') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="job" type="text" class="form-control @error('job') is-invalid @enderror" name="job" value="{{ old('job') }}" required autocomplete="job" autofocus>
-
-                                @error('job')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        
-                        <div class="row mb-3">
-                            <label for="last_education" class="col-md-4 col-form-label text-md-end">{{ __('Pendidikan Terakhir') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="last_education" type="text" class="form-control @error('last_education') is-invalid @enderror" name="last_education" value="{{ old('last_education') }}" required autocomplete="last_education" autofocus>
-
-                                @error('last_education')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="place_of_birth" class="col-md-4 col-form-label text-md-end">{{ __('Tempat Lahir') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="place_of_birth" type="text" class="form-control @error('place_of_birth') is-invalid @enderror" name="place_of_birth" value="{{ old('place_of_birth') }}" required autocomplete="place_of_birth" autofocus>
-
-                                @error('place_of_birth')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="date_of_birth" class="col-md-4 col-form-label text-md-end">{{ __('Tanggal Lahir') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="date_of_birth" type="date" class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ old('date_of_birth') }}" required autocomplete="date_of_birth" autofocus>
-
-                                @error('date_of_birth')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Register Data SiPetang</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="asset/register/css/montserrat-font.css">
+	<link rel="stylesheet" type="text/css" href="asset/register/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+	<!-- Main Style Css -->
+    <link rel="stylesheet" href="asset/register/css/style.css"/>
+</head>
+<body class="form-v10">
+	
+	<div class="page-content">
+		<div class="form-v10-content">
+			@if ($errors->any())
+				<div class="alert alert-danger">
+					<ul>
+						@foreach ($errors->all() as $error)
+							<li><p style="color:red;">{{ $error }}</p></li>
+						@endforeach
+					</ul>
+				</div>
+			@endif
+			<form class="form-detail" action="{{ route('register') }}" method="POST" id="myform">
+                @csrf
+				<div class="form-left">
+					<h2>Akun Information</h2>
+                    <div class="form-row">
+						<input type="text" name="name" class="company" id="name" placeholder="Nama Lengkap" value="{{ old('name') }}" required>
+					</div>
+                    <div class="form-row">
+						<input type="email" name="email" class="company" id="email" value="{{ old('email') }}" placeholder="Email Untuk login" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
+					</div>
+                    <div class="form-row">
+						<input type="password" name="password" class="company" id="password" placeholder="Password Login" required>
+					</div>
+					<div class="form-group">
+						<div class="form-row form-row-1">
+							<input type="number" name="phone" id="phone" class="input-text" value="{{ old('phone') }}" placeholder="No Handphone" required>
+						</div>
+						<div class="form-row form-row-2">
+							<select name="gender" required>
+							    <option value="male">Laki - Laki</option>
+							    <option value="female">Perempuan</option>
+							</select>
+							<span class="select-btn">
+							  	<i class="zmdi zmdi-chevron-down"></i>
+							</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-row form-row-3">
+							<input type="text" name="person_id" class="business" id="person_id" value="{{ old('person_id') }}" placeholder="NIK" required>
+						</div>
+						<div class="form-row form-row-4">
+							<input type="text" name="family_id" class="business" id="family_id" value="{{ old('family_id') }}" placeholder="No KK" required>
+						</div>
+					</div>
+				</div>
+				<div class="form-right">
+					<h2>Detail Informasi</h2>
+					<div class="form-row">
+						<input type="text" name="address" class="street" id="address" placeholder="Alamat" value="{{ old('address') }}" required>
+					</div>
+					<div class="form-row">
+						<input type="text" name="citizenship" class="additional" id="citizenship" value="{{ old('citizenship') }}" placeholder="Kewarganegaraan" required>
+					</div>
+					<div class="form-group">
+						<div class="form-row form-row-1">
+							<select name="religion" required>
+                                <option value="">Agama Anda</option>
+							    <option value="Islam">Islam</option>
+							    <option value="Kristen">Kristen</option>
+							    <option value="Katholik">Katholik</option>
+							    <option value="Khonghucu">Khonghucu</option>
+                                <option value="Hindu">Hindu</option>
+                                <option value="Budha">Budha</option>
+							</select>
+						</div>
+						<div class="form-row form-row-2">
+							<select name="blood_group" required>
+                                <option value="">Pilih Golongan Darah Anda</option>
+							    <option value="A">A</option>
+							    <option value="AB">AB</option>
+							    <option value="B">B</option>
+							    <option value="O">O</option>
+                                <option value="-">Tidak Tahu</option>
+							</select>
+							<span class="select-btn">
+							  	<i class="zmdi zmdi-chevron-down"></i>
+							</span>
+						</div>
+					</div>
+					<div class="form-row">
+						<select name="married_status">
+						    <option value="Belum Kawin">Belum Kawin</option>
+						    <option value="Kawin">Kawin</option>
+						    <option value="Cerai Hidup">Cerai Hidup</option>
+						    <option value="Cerai Mati">Cerai Mati</option>
+						</select>
+						<span class="select-btn">
+						  	<i class="zmdi zmdi-chevron-down"></i>
+						</span>
+					</div>
+					<div class="form-group">
+						<div class="form-row form-row-1">
+							<input type="text" name="job" class="code" id="job" placeholder="Pekerjaan" value="{{ old('job') }}" required>
+						</div>
+						<div class="form-row form-row-2">
+							<input type="text" name="last_education" class="phone" id="last_education" value="{{ old('last_education') }}" placeholder="Pendidikan Terakhir" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-row form-row-1">
+							<input type="text" name="place_of_birth" class="code" id="place_of_birth" value="{{ old('place_of_birth') }}" placeholder="Tempat Lahir" required>
+						</div>
+						<div class="form-row form-row-2">
+							<input type="date" name="date_of_birth" class="phone" id="date_of_birth" value="{{ old('birth_of_date') }}" required>
+						</div>
+					</div>
+					<div class="form-row-last">
+						<input type="submit" name="register" class="register" value="Daftar">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

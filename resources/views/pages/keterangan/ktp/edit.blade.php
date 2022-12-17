@@ -11,6 +11,15 @@
         <form class="forms-sample" method="POST" action="{{ url('/keterangan/ktp/'.$item->id) }}" enctype="multipart/form-data">
           @csrf
           @method('PUT')
+          @if($errors->any())
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+          @endif
           <div class="form-group">
             <label for="name">Name</label>
             <select class="form-control" id="user_id" name="user_id">
@@ -29,6 +38,7 @@
               <option value="2" {{$item->surat_id == 2 ? 'selected' : ''  }}>Permohonan</option>
             </select>
           </div>
+          @role('admin')
           <div class="form-group">
             <label for="status">Status</label>
             <select class="form-control" id="status" name="status">
@@ -37,6 +47,7 @@
               <option value="rejected" {{ $item->status == 'rejected' ? 'selected' : '' }}>Ditolak</option>
             </select>
           </div>
+          @endrole
           <button type="submit" class="btn btn-primary me-2">Submit</button>
           <button type="reset" class="btn btn-light">Cancel</button>
         </form>

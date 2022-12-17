@@ -10,6 +10,15 @@
         </p>
         <form class="forms-sample" method="POST" action="{{ route('jamkesos.store') }}" enctype="multipart/form-data">
           @csrf
+          @if($errors->any())
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+          @endif
           <div class="form-group">
             <label for="name">Name</label>
             <select class="form-control" id="user_id" name="user_id">
@@ -30,7 +39,7 @@
           </div>
           <div class="form-group">
             <label for="jamkesos_id">No Jamkesos</label>
-            <input type="text" class="form-control" id="jamkesos_id" name="jamkesos_id" placeholder="Nama Baru">
+            <input type="text" class="form-control" id="jamkesos_id" name="jamkesos_id">
           </div>
           <div class="form-group">
             <label for="keperluan">Keperluan</label>
