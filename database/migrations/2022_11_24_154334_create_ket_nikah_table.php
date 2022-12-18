@@ -15,15 +15,15 @@ return new class extends Migration
     {
         Schema::create('ket_nikah', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->bigInteger('ayah_id');
-            $table->bigInteger('ibu_id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('ayah_id')->unsigned();
+            $table->bigInteger('ibu_id')->unsigned();
 
-            $table->bigInteger('surat_id');
-            $table->bigInteger('pasangan_id');
-            $table->bigInteger('ayah_pasangan_id');
-            $table->bigInteger('ibu_pasangan_id');
-            $table->bigInteger('wali_id');
+            $table->bigInteger('surat_id')->unsigned();
+            $table->bigInteger('pasangan_id')->unsigned();
+            $table->bigInteger('ayah_pasangan_id')->unsigned();
+            $table->bigInteger('ibu_pasangan_id')->unsigned();
+            $table->bigInteger('wali_id')->unsigned();
             $table->bigInteger('pasangan_dulu_id')->nullable();
             $table->string('place');
             $table->text('mas_kawin')->nullable();

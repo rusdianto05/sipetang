@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('ket_lahir', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->bigInteger('surat_id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('surat_id')->unsigned();
             $table->enum('kondisi', ['hidup', 'mati']);
             $table->text('lama_kandungan')->nullable();
             $table->bigInteger('pelapor_id')->nullable();

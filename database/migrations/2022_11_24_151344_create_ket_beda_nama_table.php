@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('ket_beda_nama', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->bigInteger('surat_id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('surat_id')->unsigned();
             $table->string('new_name');
             $table->text('perbedaan');
             $table->enum('status', ['pending', 'approved', 'rejected']);

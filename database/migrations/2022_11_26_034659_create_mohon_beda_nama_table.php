@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('mohon_beda_nama', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->bigInteger('surat_id');
-            $table->bigInteger('ket_beda_nama_id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('surat_id')->unsigned();
+            $table->bigInteger('ket_beda_nama_id')->unsigned();
             $table->string('akta_id');
             $table->text('alasan');
             $table->text('bukti')->nullable();

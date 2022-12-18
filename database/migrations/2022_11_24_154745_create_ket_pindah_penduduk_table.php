@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('ket_pindah_penduduk', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('name_id');
-            $table->bigInteger('pindah_id');
+            $table->bigInteger('name_id')->unsigned();
+            $table->bigInteger('pindah_id')->unsigned();
             $table->date('ktp_expired')->nullable();
             $table->string('shdk')->nullable();
             $table->timestamps();

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('mohon_nikah', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->bigInteger('surat_id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('surat_id')->unsigned();
             $table->date('tgl_nikah');
             $table->string('kepala_keluarga');
             $table->string('nama_pasangan');

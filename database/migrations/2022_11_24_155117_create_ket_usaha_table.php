@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('ket_usaha', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->bigInteger('domisili_usaha_lokal_id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('domisili_usaha_lokal_id')->unsigned();
             $table->text('keterangan');
             $table->date('valid_from');
             $table->date('valid_until');

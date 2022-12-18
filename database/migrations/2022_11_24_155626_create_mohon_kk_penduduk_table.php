@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('mohon_kk_penduduk', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
+            $table->bigInteger('user_id')->unsigned();
 
-            $table->bigInteger('surat_id');
-            $table->bigInteger('mohon_kk_id');
+            $table->bigInteger('surat_id')->unsigned();
+            $table->bigInteger('mohon_kk_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
         });
